@@ -1,3 +1,10 @@
+
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.6' apply true 
+}
+
+
+
 allprojects {
     repositories {
         jcenter() 

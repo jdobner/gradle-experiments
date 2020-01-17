@@ -1,9 +1,10 @@
 plugins {
     id 'groovy'
+    id 'java-library'
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy:2.4.10'
+    api 'org.codehaus.groovy:groovy:2.4.10'
 
     testImplementation 'org.spockframework:spock-core:1.0-groovy-2.4', {
         exclude module: 'groovy-all'
@@ -11,7 +12,7 @@ dependencies {
     
     testImplementation 'io.aeron:aeron-samples:1.25.0'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
-    compile 'com.fasterxml.jackson:jackson-base:2.10.2'
+    api 'com.fasterxml.jackson:jackson-base:2.10.2'
     runtime 'org.jeasy:easy-rules:3.4.0'
     compileOnly 'be.sysa.log-sanitizer:log-sanitizer:1.0.5'
 }
