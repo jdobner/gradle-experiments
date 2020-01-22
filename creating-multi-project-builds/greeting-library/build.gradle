@@ -1,6 +1,13 @@
+
 plugins {
     id 'groovy'
     id 'java-library'
+    id 'java'
+    id "com.github.tkruse.groovysh" version "1.0.8"
+}
+
+repositories {
+    jcenter()
 }
 
 dependencies {
@@ -10,9 +17,4 @@ dependencies {
         exclude module: 'groovy-all'
     }
     
-    testImplementation 'io.aeron:aeron-samples:1.25.0'
-    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
-    api 'com.fasterxml.jackson:jackson-base:2.10.2'
-    runtime 'org.jeasy:easy-rules:3.4.0'
-    compileOnly 'be.sysa.log-sanitizer:log-sanitizer:1.0.5'
 }
