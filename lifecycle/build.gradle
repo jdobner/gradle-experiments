@@ -1,13 +1,12 @@
+plugins {
+	id 'java'
+}
+
 println '[.] This is executed during the configuration phase.'
+
 
 task configured {
     println '[configured] This is also executed during the configuration phase.'
-}
-
-task test {
-    doLast {
-        println '[test.doLast] This is executed during the execution phase.'
-    }
 }
 
 task testBoth {
@@ -18,4 +17,67 @@ task testBoth {
 	  println '[testBoth.doLast] This is executed last during the execution phase.'
 	}
 	println '[testBoth] This is executed during the configuration phase as well.'
+	dependsOn {
+		println 'dependsOn called'
+		'test'
+	}
+	description 'Super Important task that JayDee invented'
+	group 'g1'
+	// dependsOn('foo')
 }
+
+
+
+task testMe {
+	doLast {
+		println '[test.doLast] This is executed during the execution phase.'
+	}
+	group 'g1'
+	println "delegate=$delegate"
+}
+
+testMe {
+	doFirst {
+		println '[test.doFirst] This is executed during the execution phase.'
+	}
+}
+
+testMe {
+	doFirst {
+		println '[test.doFirstFirst] This is executed during the execution phase.'
+	}
+}
+
+testMe {
+	doLast {
+		println '[test.doLastLast] This is executed during the execution phase.'
+	}
+}
+
+task ignoreMe {
+	println "Configuring $delegate"
+	doFirst {
+		println "[$delegate] executing"
+	}
+}
+
+testMe.dependsOn(ignoreMe)
+
+test {
+	println "[$delegate] configuring test"
+}
+
+compileJava {
+	doLast {
+		def t = project.getTasks().findByPath "Demo.main()"
+		t.configure {
+			doFirst {
+				println "<><><><><><><><><><><"
+			}
+		}
+	}
+
+}
+
+
+
